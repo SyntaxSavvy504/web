@@ -1,0 +1,8 @@
+discord.py>=2.3.2
+pandas>=1.5.3
+numpy>=1.24.3
+ta>=0.10.2
+python-dotenv>=0.21.1
+oandapyV20>=0.8.5
+mplfinance>=0.12.9b7
+ccxt>=4.1.6
