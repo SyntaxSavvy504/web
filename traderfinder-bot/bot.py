@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
+from modules.data_fetcher import DataFetcher
 
 load_dotenv()
 
@@ -10,6 +11,7 @@ class TraderBot(commands.Bot):
         intents = discord.Intents.default()
         intents.message_content = True
         super().__init__(command_prefix='!', intents=intents)
+        self.data_fetcher = DataFetcher()
         
     async def setup_hook(self):
         await self.load_extension('cogs.analysis')
@@ -20,7 +22,11 @@ bot = TraderBot()
 
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user} (ID: {bot.user.id})')
+    print(f'Bot {bot.user} ready!')
+    await bot.change_presence(activity=discord.Activity(
+        type=discord.ActivityType.watching, 
+        name="FX Markets"
+    ))
 
 if __name__ == '__main__':
     bot.run(os.getenv('DISCORD_TOKEN'))
